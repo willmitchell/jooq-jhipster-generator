@@ -83,7 +83,7 @@ class JooqJhipsterGenerator extends JavaGenerator {
 
             """
     @Bean
-    public ${it.fullDaoName} get${it.recordName}(){
+    public ${it.fullDaoName} get${it.daoName}(){
         return new ${it.fullDaoName}(configuration);
     }
 
@@ -93,10 +93,10 @@ class JooqJhipsterGenerator extends JavaGenerator {
         new File(outdir).mkdirs()
         assert new File(outdir).directory
 
-        String fname = "${outdir}/DaoConfiguration.java"
+        String fname = "${outdir}/JooqDaoFactory.java"
         println "Generating file: ${fname}"
 
-        def daoConfiguration = """package ${parentPackage};
+        def JooqDaoFactory = """package ${parentPackage};
 
 import org.jooq.Configuration;
 import org.springframework.context.annotation.Bean;
@@ -104,7 +104,7 @@ import javax.inject.Inject;
 
 ${header}
 @org.springframework.context.annotation.Configuration
-public class DaoConfiguration {
+public class JooqDaoFactory {
 
     @Inject
     Configuration configuration;
@@ -114,7 +114,7 @@ public class DaoConfiguration {
 }
 """
         try {
-            new File(fname).text = daoConfiguration
+            new File(fname).text = JooqDaoFactory
             def file = new File(fname)
             println "Full path: " + file.absolutePath + " size: " + file.size()
 
@@ -139,17 +139,17 @@ public class DaoConfiguration {
 """
         }.join('\n')
 
-        fname = "${outdir}/AllDaos.java"
+        fname = "${outdir}/AllJooqDaos.java"
         println "Generating file: ${fname}"
 
-        def allDaos = """package ${parentPackage};
+        def AllJooqDaos = """package ${parentPackage};
 
 import org.jooq.impl.DefaultDSLContext;
 
 import javax.inject.Inject;
 
 ${header}
-public class AllDaos {
+public class AllJooqDaos {
 
     @Inject
     public DefaultDSLContext dsl;
@@ -159,7 +159,7 @@ public class AllDaos {
 }
 """
         try {
-            new File(fname).text = allDaos
+            new File(fname).text = AllJooqDaos
             def file = new File(fname)
             println "Full path: " + file.absolutePath + " size: " + file.size()
         } catch (Exception ex) {
