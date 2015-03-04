@@ -6,9 +6,60 @@
 
     <groupId>com.app3</groupId>
     <artifactId>jooq-jhipster-generator</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.2-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <name>jooq-jhipster-generator</name>
+    <description>JOOQ code generator that generates additional beans that may be useful for JHipster/Spring Boot users
+    </description>
+    <url>https://github.com/willmitchell/jooq-jhipster-generator</url>
+
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:git@github.com:willmitchell/jooq-jhipster-generator.git</connection>
+        <developerConnection>scm:git:git@github.com:willmitchell/jooq-jhipster-generator.git</developerConnection>
+        <url>git@github.com:willmitchell/jooq-jhipster-generator.git</url>
+    </scm>
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Maven Repository Switchboard</name>
+            <layout>default</layout>
+            <url>http://repo1.maven.org/maven2</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>central</id>
+            <name>Maven Repository Switchboard</name>
+            <layout>default</layout>
+            <url>http://repo1.maven.org/maven2</url>
+        </repository>
+    </distributionManagement>
+
+    <contributors>
+        <contributor>
+            <name>Will Mitchell</name>
+            <email>will.mitchell@gmail.com</email>
+            <timezone>EST</timezone>
+            <roles>
+                <role>creator</role>
+            </roles>
+        </contributor>
+    </contributors>
 
     <properties>
         <jooq.version>3.5.2</jooq.version>
@@ -57,6 +108,24 @@
                         <version>${groovy-eclipse-batch.version}</version>
                     </dependency>
                 </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                        <configuration>
+                            <keyname>3B7EB97B</keyname>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
