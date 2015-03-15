@@ -8,7 +8,7 @@ import org.jooq.util.SchemaDefinition
  * Extends the built-in JOOQ generator in order to generate a couple extra beans
  * that are handy for people working with JHipster (Spring Boot).
  */
-class JooqJhipsterGenerator extends JavaGenerator {
+public class JooqJhipsterGenerator extends JavaGenerator {
 
     class Bucket {
         String fullRecordName
@@ -51,7 +51,8 @@ class JooqJhipsterGenerator extends JavaGenerator {
         buckets = schema.tables
                 .findAll {
             def name = getStrategy().getJavaClassName(it, GeneratorStrategy.Mode.DAO)
-            !(name.toLowerCase().contains("databasechange"))
+            // Skip DAOs for Liquibase tables and Views.
+            !(name.toLowerCase().contains("databasechange")) && !(name.toLowerCase().contains("view"))
         }
         .collect { table ->
             new Bucket(
@@ -121,8 +122,6 @@ public class JooqDaoFactory {
         } catch (Exception ex) {
             println "Exception while writing file ${fname}, message: ${ex.message}"
         }
-
-
 
 // Generate fat base class for services to use that provides direct access to Daos.
 
