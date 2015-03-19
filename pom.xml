@@ -6,7 +6,7 @@
 
     <groupId>com.app3</groupId>
     <artifactId>jooq-jhipster-generator</artifactId>
-    <version>0.3-SNAPSHOT</version>
+    <version>0.3-RELEASE</version>
     <packaging>jar</packaging>
 
     <name>jooq-jhipster-generator</name>
